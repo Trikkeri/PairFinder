@@ -24,6 +24,7 @@ public class View {
 	private JTextArea inputTxtArea;
 	private JPanel tablePanel;
 	private JScrollPane tableScrollPane;
+	private DefaultTableModel tableModel;
 	private JTable processedInputTable;
 	private JPanel outputPanel;
 	
@@ -32,7 +33,7 @@ public class View {
 		createUI();
 	}
 	
-	private void createUI() {
+	public void createUI() {
         try {
             UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
         } catch (Exception ex) {
@@ -67,44 +68,17 @@ public class View {
         frame.add(tablePanel);
         
         processedInputTable = new JTable();
-        processedInputTable.setModel(new DefaultTableModel(
-    			new Object[][] {
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    				{null, null, null},
-    			},
-    			new String[] {
-    				"New column", "New column", "New column"
-    			}
-    		));
+		DefaultTableModel tableModel = new DefaultTableModel();
+        tableModel.addColumn("futureCheckbox");
+        tableModel.addColumn("SSN");
+        tableModel.addColumn("Name");
+        processedInputTable.setModel(tableModel);
+        tableModel.addRow(new Object[] {"testing1", "testing2", "testing3"});
         
         tableScrollPane = new JScrollPane();
         tableScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
         tableScrollPane.setViewportView(processedInputTable);
-        frame.add(tableScrollPane);
+        tablePanel.add(tableScrollPane);
         
         outputPanel = new JPanel();
         outputPanel.setBorder(new TitledBorder(null, "Pane 3", TitledBorder.LEADING, TitledBorder.TOP, null, null));
@@ -113,4 +87,15 @@ public class View {
         frame.pack();
 	}
 	
+	public JTextArea getInputTxtArea() {
+		return inputTxtArea;
+	}
+	
+	public JTable getProcessedInputTable() {
+		return processedInputTable;
+	}
+	
+	public DefaultTableModel getTableModel() {
+		return tableModel;
+	}
 }

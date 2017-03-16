@@ -11,6 +11,8 @@ public class Main {
 			public void run() {
 				try {
 					View v = new View();
+					Model m = new Model();
+					Controller c = new Controller(v, m);
 				} catch(Exception e) {
 					e.printStackTrace();
 				}
