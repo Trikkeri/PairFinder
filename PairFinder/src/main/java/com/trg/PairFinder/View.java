@@ -68,12 +68,11 @@ public class View {
         frame.add(tablePanel);
         
         processedInputTable = new JTable();
-		DefaultTableModel tableModel = new DefaultTableModel();
+		tableModel = new DefaultTableModel();
         tableModel.addColumn("futureCheckbox");
         tableModel.addColumn("SSN");
         tableModel.addColumn("Name");
         processedInputTable.setModel(tableModel);
-        tableModel.addRow(new Object[] {"testing1", "testing2", "testing3"});
         
         tableScrollPane = new JScrollPane();
         tableScrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);

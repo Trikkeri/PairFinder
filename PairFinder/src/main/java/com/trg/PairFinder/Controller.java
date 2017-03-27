@@ -22,7 +22,6 @@ public class Controller {
 	
 	private void initializeController(KeyListener kl){
 		v.getInputTxtArea().addKeyListener(kl);
-		checkForPairs();
 	}
 	
 	private void checkForPairs() {
@@ -30,29 +29,36 @@ public class Controller {
 		ArrayList<String> pairs = new ArrayList<String>();
 		
 		pairs = m.checkForPairs(v.getInputTxtArea().getText());
-		//System.out.println("pairs: " + pairs.get(0));
+		
+		
+		
+		
 		v.getTableModel().addRow(new Object[] { "", "test", "test" });
 	}
 	
 	class DelayedKeyListener implements KeyListener {
 		
+		ActionListener taskPerformer = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				System.out.println("This should fire after 2 secs");
+				checkForPairs();
+			}
+		};
+
+		Timer t = new Timer(2000, taskPerformer);
+		
 		@Override
 		public void keyPressed(KeyEvent arg0) {
-
+			// Restart timer if user start typing more characters
+			t.restart();
 		}
 
 		@Override
 		public void keyReleased(KeyEvent arg0) {
-			ActionListener taskPerformer = new ActionListener() {
-
-				@Override
-				public void actionPerformed(ActionEvent e) {
-					System.out.println("This should fire after 2 secs");
-					checkForPairs();
-				}
-			};
-			Timer t = new Timer(2000, taskPerformer);
 			t.setRepeats(false);
+			// Start timer
 			t.start();
 		}
 
@@ -60,6 +66,7 @@ public class Controller {
 		public void keyTyped(KeyEvent arg0) {
 			
 		}
+		
 	}
 }
 
